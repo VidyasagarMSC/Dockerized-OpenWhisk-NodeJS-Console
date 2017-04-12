@@ -1,4 +1,4 @@
-# Node.js OpenWhisk Webui - Query Console
+# Node.js OpenWhisk Query Console DOCKER-ized to quickly run and manage
 
 The Webui demonstrates a simple, reusable Node.js web application based on the Express framework that interacts with OpenWhisk APIs and provides an interface to list and Invoke actions,Packages and API gateway routes. The app extensively uses JavaScript client library(npm package) for the OpenWhisk platform.
 
@@ -10,6 +10,9 @@ OpenWhisk is a serverless platform that lets developers quickly and easily build
 1. Bluemix account.
 2. OpenWhisk CLI.
 3. Cloudfoundry or Bluemix CLI.
+4. Docker CLI
+
+For more details, Refer this [post](http://vidyasagarmsc.com/creating-a-docker-container-on-bluemix/) 
 
 ## Getting Started
 - Don’t have Bluemix account? <a title="(Opens in a new tab or window)" href="https://console.ng.bluemix.net/registration/" target="_blank">Sign up</a> to create a free trial account.
@@ -26,14 +29,10 @@ You can use the OpenWhisk command line interface (CLI) to set up your namespace 
 
 ## Run the app locally
 
-- [Install Node.js][]
 - Clone the repo
 ```
-git clone https://github.com/VidyasagarMSC/openwhisk-nodejs-webui.git
+git clone https://github.com/VidyasagarMSC/Dockerized-OpenWhisk-NodeJS-Console.git
 ```
-- cd into the app directory
-- Run `npm install` to install the app's dependencies
-- Open manifest.yml file and provide a unique name,host.
 - Create a newfile and save it as .env in the root of the folder.Add the below
   values to .env file and save
 
@@ -45,24 +44,40 @@ git clone https://github.com/VidyasagarMSC/openwhisk-nodejs-webui.git
 ```
 wsk property get --auth
 ```
-- Run `npm start` to start the app
-- Access the running app in a browser at http://localhost:6007
-## Push to Bluemix
+- Navigate to the root of the folder and run the below command to build by tagging your docker image
+```
+docker build -t <your username>/node-openwhisk-docker
+```
+- To see your image run the below command
+```
+docker images
+```
+### Run the docker image
+- Running your image with -d runs the container in detached mode, leaving the container running in the background. The -p flag redirects a public port to a private port inside the container. Run the image you previously built:
 
-- Go to the root of the folder on your terminal, run the below command
 ```
-cf push
+$ docker run -p 49160:6001 -d <your username>/node-openwhisk-docker
 ```
-- Based on the artifacts in your manifest.yml file, NodeJS runtime is created and you can see your app running on the host your provided.
+
+- Access the running app in a browser at http://localhost:49160
+## Running on IBM Containers
+
+Refer this [post](http://vidyasagarmsc.com/creating-a-docker-container-on-bluemix/)
+
+- To assign an IP address
+
+```
+bx ic ip-request
+```
 
 ## Test your app Web UI
 
-- http://localhost:6007/invoke/MyWatsonSequence?message=Interconnect (Try with different message values and use %20 if there is a space in your message like hello%20world)
--   http://localhost:6007/list/actions
-- 	http://localhost:6007/list/routes
-- 	http://localhost:6007/list/packages
+- http://localhost:49160/invoke/MyWatsonSequence?message=Interconnect (Try with different message values and use %20 if there is a space in your message like hello%20world)
+-   http://localhost:49160/list/actions
+- 	http://localhost:49160/list/routes
+- 	http://localhost:49160/list/packages
 
-Replace localhost:6007 with your Bluemix Hostname to test this on your public url.
+Replace localhost:6007 with your Bluemix Hostname or IP address to test this on your public url.
 
 ## REST API
 Refer [openwhisk-nodejs-api repo](https://github.com/VidyasagarMSC/openwhisk-nodejs-api)
@@ -71,6 +86,3 @@ Refer [openwhisk-nodejs-api repo](https://github.com/VidyasagarMSC/openwhisk-nod
 
 - Creating a sequence.
 - Watson Service Chaining.
-
-
-[Install Node.js]: https://nodejs.org/en/download/
