@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>OpenWhisk NodeJS Console</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../stylesheets/style.css">
+  </head>
+
+  <body>
+    <table>
+      <tr>
+        <td style= "width:30%;">
+          <img class = "newappIcon" src="../images/newapp-icon.png">
+        </td>
+        <td>
+          <h1 id="message">OpenWhisk Query Console</h1>
+          <h4 id="message">Request:</h4>
+          <div class="flex-container">
+          <p id="response"><pre><%- request %></pre></p>
+        </div>
+          <h4 id="message">Response:</h4>
+          <div class="container">
+          <p id="response"><pre><%- response %></pre></p>
+        </div>
+        <p class='description'></p> Powered by <span class = "blue"><a href="https://bluemix.net" target="_blank">IBM Bluemix</a></span>.
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "OpenWhiskNodeJSDockerApp",
+  "version": "0.0.1",
+  "private": true,
+  "main":"app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "cfenv": "^1.0.4",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.5",
+    "express": "^4.13.4",
+    "openwhisk": "^3.2.1"
+  },
+  "repository": {},
+  "engines": {
+    "node": "4.x"
+  }
+}
